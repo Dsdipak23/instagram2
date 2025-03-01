@@ -1,0 +1,256 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Hashtag Generator</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #405DE6, #833AB4);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .header p {
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+    }
+
+    /* Main Container */
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      margin: 20px;
+      text-align: center;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    .dropdown:focus {
+      border-color: #833AB4;
+    }
+
+    /* Hashtag Display */
+    .hashtags {
+      background: #f1f1f1;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: left;
+      font-size: 1rem;
+      line-height: 1.6;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .hashtags span {
+      display: inline-block;
+      background: #405DE6;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin: 5px;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+
+    .footer a {
+      color: #833AB4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <h1>Instagram Hashtag Generator</h1>
+    <p>Generate 10 relevant hashtags for your niche in seconds!</p>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Dropdown for Niche Selection -->
+    <select class="dropdown" id="nicheDropdown">
+      <option value="" disabled selected>Select a Niche</option>
+      <option value="fitness">Fitness</option>
+      <option value="travel">Travel</option>
+      <option value="food">Food</option>
+      <option value="fashion">Fashion</option>
+      <option value="photography">Photography</option>
+      <option value="beauty">Beauty</option>
+      <option value="technology">Technology</option>
+      <option value="art">Art</option>
+      <option value="business">Business</option>
+      <option value="lifestyle">Lifestyle</option>
+      <option value="health">Health</option>
+      <option value="education">Education</option>
+      <option value="sports">Sports</option>
+      <option value="music">Music</option>
+      <option value="gaming">Gaming</option>
+      <option value="pets">Pets</option>
+      <option value="cars">Cars</option>
+      <option value="homeDecor">Home Decor</option>
+      <option value="parenting">Parenting</option>
+      <option value="books">Books</option>
+    </select>
+
+    <!-- Hashtag Display -->
+    <div class="hashtags" id="hashtags"></div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>this website make ?? by <a href="#" target="_blank">Your Dipak</a></p>
+  </div>
+
+  <script>
+    // Hashtag Data for Each Niche
+    const hashtagData = {
+      fitness: [
+        "#fitness", "#gym", "#workout", "#fitlife", "#healthylifestyle",
+        "#bodybuilding", "#fitnessmotivation", "#trainhard", "#fitfam", "#exercise"
+      ],
+      travel: [
+        "#travel", "#wanderlust", "#adventure", "#explore", "#vacation",
+        "#travelgram", "#travelphotography", "#travelblogger", "#travelmore", "#travelgoals"
+      ],
+      food: [
+        "#food", "#foodie", "#foodporn", "#yum", "#delicious",
+        "#foodphotography", "#instafood", "#foodstagram", "#foodlover", "#foodblogger"
+      ],
+      fashion: [
+        "#fashion", "#style", "#ootd", "#fashionista", "#streetstyle",
+        "#fashionblogger", "#fashionstyle", "#lookgoodfeelgood", "#trendy", "#fashionable"
+      ],
+      photography: [
+        "#photography", "#photooftheday", "#picoftheday", "#instaphoto", "#photographer",
+        "#photoshoot", "#portrait", "#landscape", "#naturephotography", "#camera"
+      ],
+      beauty: [
+        "#beauty", "#makeup", "#skincare", "#cosmetics", "#glam",
+        "#beautyblogger", "#makeupaddict", "#beautyhacks", "#skincareroutine", "#makeuplover"
+      ],
+      technology: [
+        "#technology", "#tech", "#innovation", "#gadgets", "#smartphone",
+        "#technews", "#futuretech", "#artificialintelligence", "#robotics", "#techlover"
+      ],
+      art: [
+        "#art", "#artist", "#artwork", "#drawing", "#painting",
+        "#digitalart", "#illustration", "#creative", "#artlover", "#artgallery"
+      ],
+      business: [
+        "#business", "#entrepreneur", "#startup", "#marketing", "#success",
+        "#leadership", "#businessowner", "#smallbusiness", "#businessgrowth", "#entrepreneurship"
+      ],
+      lifestyle: [
+        "#lifestyle", "#life", "#inspiration", "#motivation", "#happiness",
+        "#selfcare", "#mindset", "#lifestyleblogger", "#lifestylephotography", "#lifestylegoals"
+      ],
+      health: [
+        "#health", "#wellness", "#healthy", "#nutrition", "#fitness",
+        "#mentalhealth", "#selfcare", "#healthyliving", "#healthylifestyle", "#wellbeing"
+      ],
+      education: [
+        "#education", "#learning", "#knowledge", "#study", "#school",
+        "#students", "#teacher", "#onlinelearning", "#educationmatters", "#studygram"
+      ],
+      sports: [
+        "#sports", "#fitness", "#athlete", "#training", "#soccer",
+        "#basketball", "#football", "#workout", "#sportlife", "#sportsphotography"
+      ],
+      music: [
+        "#music", "#musician", "#song", "#artist", "#guitar",
+        "#piano", "#singing", "#musiclover", "#musiclife", "#musicproduction"
+      ],
+      gaming: [
+        "#gaming", "#gamer", "#videogames", "#esports", "#gamergirl",
+        "#gaminglife", "#gamingcommunity", "#gamingpc", "#gamingrig", "#gamingsetup"
+      ],
+      pets: [
+        "#pets", "#dog", "#cat", "#petlover", "#animals",
+        "#petsofinstagram", "#dogstagram", "#catstagram", "#petphotography", "#petcare"
+      ],
+      cars: [
+        "#cars", "#car", "#automotive", "#carphotography", "#supercar",
+        "#luxurycars", "#carlifestyle", "#carsofinstagram", "#cargram", "#carlover"
+      ],
+      homeDecor: [
+        "#homedecor", "#interiordesign", "#decor", "#home", "#homedesign",
+        "#interior", "#homedecoration", "#homedecorideas", "#livingroom", "#bedroomdecor"
+      ],
+      parenting: [
+        "#parenting", "#momlife", "#dadlife", "#family", "#kids",
+        "#parentingtips", "#parenthood", "#momblogger", "#dadblogger", "#familytime"
+      ],
+      books: [
+        "#books", "#bookstagram", "#reading", "#booklover", "#bookworm",
+        "#bibliophile", "#bookphotography", "#bookrecommendations", "#bookclub", "#readmore"
+      ]
+    };
+
+    // Get DOM Elements
+    const nicheDropdown = document.getElementById('nicheDropdown');
+    const hashtagsContainer = document.getElementById('hashtags');
+
+    // Event Listener for Dropdown Change
+    nicheDropdown.addEventListener('change', () => {
+      const selectedNiche = nicheDropdown.value;
+      if (selectedNiche && hashtagData[selectedNiche]) {
+        const hashtags = hashtagData[selectedNiche];
+        hashtagsContainer.innerHTML = hashtags.map(tag => <span>${tag}</span>).join('');
+      } else {
+        hashtagsContainer.innerHTML = '<p>No hashtags found for this niche.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
